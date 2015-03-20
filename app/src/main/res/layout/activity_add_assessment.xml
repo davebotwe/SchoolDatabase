@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:onClick="onClickAddAssessment" />
     <Button
-        android:text="View Enrollments"
+        android:text="View Assessments"
         android:id="@+id/btnRetrieve"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

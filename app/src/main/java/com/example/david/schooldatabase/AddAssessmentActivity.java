@@ -1,6 +1,7 @@
 package com.example.david.schooldatabase;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -61,29 +62,12 @@ public class AddAssessmentActivity extends ActionBarActivity {
         values.put(SchoolDBProvider.MID_SEMESTER,
                 ((EditText)findViewById(R.id.txtMidSemester)).getText().toString());
         values.put(SchoolDBProvider.FINAL_EXAM,
-                ((EditText)findViewById(R.id.txtCourseCode)).getText().toString());
+                ((EditText)findViewById(R.id.txtFinalExam)).getText().toString());
         Uri uri = getContentResolver().insert(SchoolDBProvider.CONTENT_URI_4, values);
         Toast.makeText(getBaseContext(),
                 uri.toString(), Toast.LENGTH_LONG).show();
     }
     public void onClickRetrieveAssessments(View view) {
-// Retrieve enrollment records
-        String URL = "content://com.example.david.schooldatabase/assessments";
-        Uri enrollments = Uri.parse(URL);
-        Cursor c = managedQuery(enrollments, null, null, null, "index_no");
-        if (c.moveToFirst()) {
-            do{
-                Toast.makeText(this,
-                        c.getString(c.getColumnIndex(SchoolDBProvider._ID)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.INDEX_NO)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.ACADEMIC_YEAR)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.SEMESTER)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.COURSE_CODE)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.ATTENDANCE)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.MID_SEMESTER)) +
-                                ", " + c.getString(c.getColumnIndex( SchoolDBProvider.FINAL_EXAM)),
-                        Toast.LENGTH_SHORT).show();
-            } while (c.moveToNext());
-        }
+        startActivity(new Intent(this, AssessmentsActivity.class));
     }
 }
